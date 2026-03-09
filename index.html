@@ -3,76 +3,19 @@
 <head>
   <meta charset="utf-8">
   <title>Redireccionando...</title>
-  <style>
-    body {
-      background-color: white;
-      text-align: center;
-      font-family: Arial, sans-serif;
-    }
-    .lds-ring {
-      display: inline-block;
-      position: relative;
-      width: 80px;
-      height: 80px;
-    }
-    .lds-ring div {
-      box-sizing: border-box;
-      display: block;
-      position: absolute;
-      width: 64px;
-      height: 64px;
-      margin: 8px;
-      border: 8px solid #000;
-      border-radius: 50%;
-      animation: lds-ring 1.0s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-      border-color: #000 transparent transparent transparent;
-    }
-    .lds-ring div:nth-child(1) {
-      animation-delay: -0.45s;
-    }
-    .lds-ring div:nth-child(2) {
-      animation-delay: -0.3s;
-    }
-    .lds-ring div:nth-child(3) {
-      animation-delay: -0.15s;
-    }
-    @keyframes lds-ring {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-  </style>
 </head>
 <body>
   <script>
-    const AS_URL_BASE = "https://script.google.com/macros/s/AKfycbwrfLwqeX7NVpUW5ip0LLaHyHpF7Tw5MZ4HHv4MKtoKcujzopHtL11nXU0nLbe6MmmNLQ/exec";
-    const urlParams = new URLSearchParams(window.location.search);
-    const k = urlParams.get('k');
+    const AS_URL_BASE = "AKfycbwrfLwqeX7NVpUW5ip0LLaHyHpF7Tw5MZ4HHv4MKtoKcujzopHtL11nXU0nLbe6MmmNLQ";
+    const k = new URLSearchParams(window.location.search).get("k");
 
     if (k) {
-      fetch(`${AS_URL_BASE}?k=${k}`)
-        .then(response => response.text())
-        .then(r => {
-          if (r) {
-            window.location.replace(r);
-          }
-        })
-        .catch(console.error);
+      window.location.replace(AS_URL_BASE + "?k=" + encodeURIComponent(k));
     } else {
-      console.error('No "k" parameter found in URL');
+      document.body.textContent = 'Falta el parámetro "k"';
     }
   </script>
 
-  <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-     <p>Redireccionando...</p>
-  <p>
-    <a href="https://ibb.co/1mnmv6Y">
-      <img src="https://i.ibb.co/RDSDvyG/LOGO-FABI-N-MART-N.png" alt="LOGO-FABI-N-MART-N" border="0">
-    </a>
-  </p>
- 
+  Redireccionando...
 </body>
 </html>
