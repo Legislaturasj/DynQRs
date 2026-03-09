@@ -10,7 +10,19 @@
     const k = new URLSearchParams(window.location.search).get("k");
 
     if (k) {
-      window.location.replace(AS_URL_BASE + "?k=" + encodeURIComponent(k));
+      fetch(AS_URL_BASE + "?k=" + encodeURIComponent(k), { cache: "no-store" })
+        .then(r => r.text())
+        .then(url => {
+          url = url.trim();
+          if (url) {
+            window.location.replace(url);
+          } else {
+            document.body.textContent = "No se encontró destino para este QR";
+          }
+        })
+        .catch(() => {
+          document.body.textContent = "Error al redirigir";
+        });
     } else {
       document.body.textContent = 'Falta el parámetro "k"';
     }
